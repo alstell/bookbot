@@ -23,13 +23,33 @@ def charcount(text):
     return(char_count)
 
 def convert_count(charcount_dict):
-    pass
+    char_count_list = []
+    for key in charcount_dict:
+        if key.isalpha():
+            temp_dict = {}
+            temp_dict["letter"] = key
+            temp_dict["count"] = charcount_dict[key]
+            char_count_list.append(temp_dict)
+    
+    char_count_list.sort(reverse=True, key=sort_on)
+    return char_count_list
+
 
 def sort_on(dict):
-    pass
+    return dict["count"]
+
 
 def print_report(book, wordcount, sorted_char_list):
     print(f"***** Begin report of {book} *****")
+    print("\n-----------------------------------")
+    print(f"{wordcount} words found in the document")
+    print("-----------------------------------")
+    print("\n----------------------------------------------")
+    print("Character list sorted from most to least used\n")
+    for dict in sorted_char_list:
+        print(f"The '{dict["letter"]}' character was found {dict["count"]} times")
+    print("----------------------------------------\n")
+    print(f"***** End report of {book} *****")
 
 main()
 
